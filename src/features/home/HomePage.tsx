@@ -1,5 +1,7 @@
-import { FileText, LayoutGrid, Wrench, Braces } from 'lucide-react'
+import { FileText, Github, LayoutGrid, Wrench, Braces } from 'lucide-react'
 import { ToolCard } from './ToolCard'
+
+const REPO_URL = 'https://github.com/0xBS0D27/toolsuitems'
 
 const TOOLS = [
   {
@@ -42,6 +44,16 @@ export function HomePage() {
               ToolSuitems
             </h1>
           </div>
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+            aria-label="View source on GitHub"
+          >
+            <Github className="h-5 w-5 shrink-0" strokeWidth={2} />
+            <span className="hidden sm:inline">GitHub</span>
+          </a>
         </div>
       </header>
 

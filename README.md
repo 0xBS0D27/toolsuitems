@@ -1,44 +1,47 @@
 # ToolSuitems
 
-Proyecto web de codigo abierto con herramientas de productividad y visualizacion de datos.
+Open-source web app with productivity tools and data visualization.
 
-Actualmente incluye:
-- **Notas** para escritura y organizacion personal.
-- **JSON Tree Visualizer** para visualizar JSON en forma de arbol y grafo.
+**Included today:**
+- **Notes** — personal writing and organization.
+- **JSON Tree Visualizer** — explore JSON as a tree and graph.
 
-Proximamente:
-- **Tablero Kanban** para gestion visual de tareas.
+**Coming soon:**
+- **Kanban board** — visual task management.
 
-## Que resuelve este proyecto
+## What this project is for
 
-`ToolSuitems` esta pensado para estudiantes, desarrolladores y equipos que necesitan:
-- tomar notas rapidas con una experiencia limpia tipo Notion,
-- explorar estructuras JSON complejas de forma visual,
-- y trabajar sobre una base extensible para nuevas herramientas.
+`ToolSuitems` is aimed at students, developers, and teams who want to:
+- take quick notes in a clean, Notion-like UI,
+- explore complex JSON structures visually,
+- extend the codebase with new tools over time.
 
-## Modulos disponibles
+## Modules
 
-### 1) Notas
-Permite crear, editar y organizar notas con guardado local.
+### 1) Notes
 
-Funciones principales:
-- Crear y editar notas.
-- Busqueda por contenido y filtro por etiquetas.
-- Favoritos, archivado y papelera.
-- Exportacion de notas a `.md` y `.txt`.
+Create, edit, and organize notes with local persistence.
+
+**Features:**
+- Create and edit notes.
+- Search and filter by tags.
+- Favorites, archive, and trash.
+- Export notes to `.md` and `.txt`.
 
 ### 2) JSON Tree Visualizer
-Herramienta para visualizar datos JSON en vistas de **arbol** y **grafo** para facilitar su lectura y analisis.
 
-Funciones principales:
-- Visualizacion estructurada de objetos JSON.
-- Navegacion clara entre nodos y niveles.
-- Enfoque en comprension rapida de datos anidados.
+Visualize JSON as a **tree** and **graph** for easier reading and analysis.
 
-### 3) Kanban (proximamente)
-Modulo en desarrollo para organizar tareas por columnas y estados.
+**Features:**
+- Structured view of JSON objects.
+- Clear navigation across nodes and levels.
+- Fast understanding of nested data.
 
-## Stack tecnologico
+### 3) Kanban (coming soon)
+
+Board for tasks in columns and statuses — in development.
+
+## Tech stack
 
 - React 18
 - Vite
@@ -47,31 +50,29 @@ Modulo en desarrollo para organizar tareas por columnas y estados.
 - React Router
 - Lucide React
 
-## Estructura general
+## Project layout
 
 ```text
 src/
 ├── features/
-│   ├── notes/       # Modulo de notas
-│   ├── json-tree/   # Modulo visualizador JSON
-│   └── boards/      # Modulo Kanban (en progreso)
-├── components/      # Componentes compartidos
-├── hooks/           # Hooks personalizados
-├── services/        # Persistencia y utilidades
-├── types/           # Tipos compartidos
-└── styles/          # Estilos globales
+│   ├── notes/       # Notes module
+│   ├── json-tree/   # JSON visualizer
+│   └── boards/      # Kanban (in progress)
+├── components/      # Shared UI
+├── hooks/           # Custom hooks
+├── services/        # Storage & helpers
+├── types/           # Shared types
+└── styles/          # Global styles
 ```
 
-## Development setup
+## Development
 
-Pasos para ejecutar el proyecto en local despues de clonar el repositorio.
+### Prerequisites
 
-### Step 1 - Requisitos
-Necesitas tener instalado:
 - Node.js
 - npm
 
-### Step 2 - Clonar e instalar dependencias
+### Clone and install
 
 ```bash
 git clone https://github.com/0xBS0D27/toolsuitems.git
@@ -79,29 +80,27 @@ cd toolsuitems
 npm install
 ```
 
-### Step 3 - Ejecutar la app
+### Run locally
 
 ```bash
 npm run dev
 ```
 
-La aplicacion quedara disponible en la URL que indique Vite (normalmente `http://localhost:5173`).
+The app runs at the URL Vite prints (usually `http://localhost:5173`).
 
 ## Scripts
 
 ```bash
-npm run dev      # entorno de desarrollo
-npm run build    # build de produccion
-npm run preview  # previsualizar build
-npm run lint     # revisar calidad de codigo
+npm run dev      # development server
+npm run build    # production build
+npm run preview  # preview production build
+npm run lint     # ESLint
 ```
 
-## Contribuciones
+## Contributing
 
-Las contribuciones son bienvenidas. Si quieres proponer mejoras:
-- abre un issue con el contexto,
-- o crea un pull request con una descripcion clara del cambio.
+Contributions are welcome. Open an issue with context, or a pull request with a clear description of your changes.
 
-## Licencia
+## License
 
-Licenciado bajo MIT.
+MIT.
