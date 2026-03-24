@@ -22,7 +22,7 @@ export function ForeignNodeWrapper(props: ForeignNodeWrapperProps) {
         'font-mono text-sm font-medium',
         !props.isObject && 'text-center',
         'pointer-events-none',
-        props.isHighlighted && (props.dark ? 'bg-amber-500/20' : 'bg-amber-100')
+        props.isHighlighted && (props.dark ? 'bg-violet-500/20' : 'bg-violet-100')
       )}
     >
       <div

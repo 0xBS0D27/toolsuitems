@@ -5,7 +5,6 @@ import { useStored } from '@/features/json-tree/store/useStored'
 import { getNextDirection } from '@/features/json-tree/core/graph/getNextDirection'
 import { JsonTreeToolbar } from './JsonTreeToolbar'
 import { JsonTreeHelp } from './JsonTreeHelp'
-import { JsonTreeSearchBar } from './JsonTreeSearchBar'
 
 export function JsonTreeNavbar() {
   const fullscreen = useTree((s) => s.fullscreen)
@@ -56,9 +55,6 @@ export function JsonTreeNavbar() {
           lightmode={lightmode}
           setLightTheme={setLightTheme}
         />
-      </div>
-      <div className="sm:hidden">
-        <JsonTreeSearchBar lightmode={lightmode} />
       </div>
     </header>
   )

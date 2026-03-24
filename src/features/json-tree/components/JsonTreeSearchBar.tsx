@@ -70,23 +70,23 @@ export function JsonTreeSearchBar({ lightmode }: JsonTreeSearchBarProps) {
   }
 
   const frameClass = lightmode
-    ? 'border-gray-300 bg-white text-gray-900'
-    : 'border-amber-300 bg-zinc-900 text-white'
+    ? 'border-violet-500/70 bg-white text-gray-900 shadow-sm'
+    : 'border-violet-400/80 bg-zinc-900 text-white shadow-[0_0_0_1px_rgba(139,92,246,0.25)]'
 
   const iconClass = lightmode
-    ? 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
-    : 'text-zinc-300 hover:bg-zinc-700 hover:text-white'
+    ? 'text-violet-600 hover:bg-violet-50 hover:text-violet-700'
+    : 'text-violet-300 hover:bg-violet-500/20 hover:text-violet-200'
 
   return (
     <div className={classNames('flex items-center gap-1 rounded-xl border px-2 py-1', frameClass)}>
-      <Search className={classNames('h-4 w-4 shrink-0', lightmode ? 'text-gray-500' : 'text-zinc-300')} />
+      <Search className={classNames('h-4 w-4 shrink-0', lightmode ? 'text-violet-600' : 'text-violet-300')} />
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search node"
         className={classNames(
           'min-w-0 flex-1 bg-transparent text-sm outline-none',
-          lightmode ? 'placeholder:text-gray-400' : 'placeholder:text-zinc-400'
+          lightmode ? 'placeholder:text-violet-400' : 'placeholder:text-violet-300/70'
         )}
       />
       {query.trim() && (
@@ -107,7 +107,12 @@ export function JsonTreeSearchBar({ lightmode }: JsonTreeSearchBarProps) {
           >
             <ChevronRight className="h-4 w-4" />
           </button>
-          <span className={classNames('px-1 text-sm font-semibold', lightmode ? 'text-gray-600' : 'text-amber-300')}>
+          <span
+            className={classNames(
+              'px-1 text-sm font-semibold',
+              lightmode ? 'text-violet-700' : 'text-violet-300'
+            )}
+          >
             {matches.length === 0 ? '0/0' : `${matchIndex + 1}/${matches.length}`}
           </span>
           <button

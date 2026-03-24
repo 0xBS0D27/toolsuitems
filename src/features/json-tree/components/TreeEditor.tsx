@@ -84,7 +84,7 @@ export function TreeEditor() {
         onContextMenu={(e) => e.preventDefault()}
         className={`absolute h-full w-full ${!lightmode ? 'bg-zinc-900' : ''}`}
       >
-        <div className="pointer-events-auto absolute left-1/2 top-2 z-30 hidden w-[min(420px,65%)] -translate-x-1/2 sm:block">
+        <div className="pointer-events-auto absolute left-1/2 top-2 z-30 w-[min(420px,calc(100%-16px))] -translate-x-1/2 sm:w-[min(420px,65%)]">
           <JsonTreeSearchBar lightmode={lightmode} />
         </div>
         <div
