@@ -143,17 +143,20 @@ export function NotesPage() {
                         <SidebarTrigger onClick={() => setSidebarOpen(true)} />
                       </div>
                       <div className="rounded-xl bg-gradient-to-r from-blue-50 via-indigo-50/90 to-pink-50/80 px-6 py-6 sm:px-8 sm:py-7 md:px-10">
-                        <div className="flex items-center gap-4 sm:gap-5">
+                        <div className="flex items-center justify-between gap-4 sm:gap-5">
                           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-indigo-600 shadow-sm sm:h-14 sm:w-14">
                             <BookOpen className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.5} />
                           </div>
-                          <div className="min-w-0">
-                            <h1 className="text-2xl font-bold leading-tight tracking-tight text-notion-text sm:text-3xl">
-                              {sectionTitle}
-                            </h1>
-                            <p className="mt-0.5 text-[14px] leading-relaxed text-notion-textMuted">
-                              {sectionSubtitle}
-                            </p>
+                          <div className="flex min-w-0 flex-1 items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <h1 className="text-2xl font-bold leading-tight tracking-tight text-notion-text sm:text-3xl">
+                                {sectionTitle}
+                              </h1>
+                              <p className="mt-0.5 text-[14px] leading-relaxed text-notion-textMuted">
+                                {sectionSubtitle}
+                              </p>
+                            </div>
+                            <InfoHelp />
                           </div>
                         </div>
                       </div>
@@ -165,7 +168,6 @@ export function NotesPage() {
                             placeholder="Buscar notas…"
                           />
                         </div>
-                        <InfoHelp />
                       </div>
                     </header>
 

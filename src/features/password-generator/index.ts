@@ -1,0 +1,1 @@
+export { PasswordGeneratorPage } from './PasswordGeneratorPage'

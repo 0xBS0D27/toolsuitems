@@ -1,4 +1,4 @@
-import { FileText, Github, LayoutGrid, Wrench, Braces } from 'lucide-react'
+import { FileText, Github, LayoutGrid, Wrench, Braces, LockKeyhole } from 'lucide-react'
 import { ToolCard } from './ToolCard'
 
 const REPO_URL = 'https://github.com/0xBS0D27/toolsuitems'
@@ -28,6 +28,14 @@ const TOOLS = [
     href: '/json-tree',
     iconBg: 'bg-emerald-50',
     iconColor: 'text-emerald-600',
+  },
+  {
+    title: 'Generador de contraseñas',
+    description: 'Genera contraseñas seguras con análisis en tiempo real',
+    icon: LockKeyhole,
+    href: '/generador-contrasenas',
+    iconBg: 'bg-violet-50',
+    iconColor: 'text-violet-600',
   },
 ]
 

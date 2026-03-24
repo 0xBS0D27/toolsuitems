@@ -30,6 +30,7 @@ export function NoteEditor({
 }: NoteEditorProps) {
   const titleRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLTextAreaElement>(null)
+  const syncedNoteIdRef = useRef<string | null>(null)
 
   const debouncedUpdate = useDebounce(
     (id: string, patch: Partial<Note>) => {
@@ -40,9 +41,11 @@ export function NoteEditor({
 
   useEffect(() => {
     if (!titleRef.current || !contentRef.current) return
+    if (syncedNoteIdRef.current === note.id) return
     titleRef.current.textContent = note.title
     contentRef.current.value = note.content
-  }, [note.id])
+    syncedNoteIdRef.current = note.id
+  }, [note])
 
   const handleTitleInput = () => {
     const title = titleRef.current?.textContent?.trim() ?? ''

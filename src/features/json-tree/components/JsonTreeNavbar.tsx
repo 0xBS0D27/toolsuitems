@@ -4,6 +4,7 @@ import { useTree } from '@/features/json-tree/store/useTree'
 import { useStored } from '@/features/json-tree/store/useStored'
 import { getNextDirection } from '@/features/json-tree/core/graph/getNextDirection'
 import { JsonTreeToolbar } from './JsonTreeToolbar'
+import { JsonTreeHelp } from './JsonTreeHelp'
 
 export function JsonTreeNavbar() {
   const fullscreen = useTree((s) => s.fullscreen)
@@ -40,6 +41,7 @@ export function JsonTreeNavbar() {
             JSON Tree
           </span>
         </Link>
+        <JsonTreeHelp lightmode={lightmode} />
       </div>
       <JsonTreeToolbar
         fullscreen={fullscreen}

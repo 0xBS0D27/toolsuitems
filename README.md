@@ -1,47 +1,21 @@
 # ToolSuitems
 
-Open-source web app with productivity tools and data visualization.
+Colección open-source de herramientas web orientadas a productividad y visualización de datos, ejecutadas en frontend.
 
-**Included today:**
-- **Notes** — personal writing and organization.
-- **JSON Tree Visualizer** — explore JSON as a tree and graph.
+## Módulos actuales
 
-**Coming soon:**
-- **Kanban board** — visual task management.
+- **Notas**: creación, edición, favoritos, archivado, búsqueda y exportación.
+- **JSON Tree**: visualización de JSON en editor + árbol/gráfico interactivo.
+- **Generador de contraseñas**:
+  - generación local con `crypto.getRandomValues()`,
+  - medición de fortaleza por entropía,
+  - verificación de filtraciones con modelo k-anonimato (HIBP Pwned Passwords API).
 
-## What this project is for
+## Próximamente
 
-`ToolSuitems` is aimed at students, developers, and teams who want to:
-- take quick notes in a clean, Notion-like UI,
-- explore complex JSON structures visually,
-- extend the codebase with new tools over time.
+- **Tablero Kanban** para organización visual de tareas.
 
-## Modules
-
-### 1) Notes
-
-Create, edit, and organize notes with local persistence.
-
-**Features:**
-- Create and edit notes.
-- Search and filter by tags.
-- Favorites, archive, and trash.
-- Export notes to `.md` and `.txt`.
-
-### 2) JSON Tree Visualizer
-
-Visualize JSON as a **tree** and **graph** for easier reading and analysis.
-
-**Features:**
-- Structured view of JSON objects.
-- Clear navigation across nodes and levels.
-- Fast understanding of nested data.
-
-### 3) Kanban (coming soon)
-
-Board for tasks in columns and statuses — in development.
-
-## Tech stack
+## Stack técnico
 
 - React 18
 - Vite
@@ -50,29 +24,30 @@ Board for tasks in columns and statuses — in development.
 - React Router
 - Lucide React
 
-## Project layout
+## Estructura del proyecto
 
 ```text
 src/
-├── features/
-│   ├── notes/       # Notes module
-│   ├── json-tree/   # JSON visualizer
-│   └── boards/      # Kanban (in progress)
-├── components/      # Shared UI
-├── hooks/           # Custom hooks
-├── services/        # Storage & helpers
-├── types/           # Shared types
-└── styles/          # Global styles
+├── components/      # UI compartida
+├── features/        # Módulos por herramienta
+│   ├── notes/
+│   ├── json-tree/
+│   ├── password-generator/
+│   └── boards/
+├── hooks/
+├── services/
+├── types/
+└── styles/
 ```
 
-## Development
+## Desarrollo local
 
-### Prerequisites
+### Requisitos
 
 - Node.js
 - npm
 
-### Clone and install
+### Instalación
 
 ```bash
 git clone https://github.com/0xBS0D27/toolsuitems.git
@@ -80,27 +55,68 @@ cd toolsuitems
 npm install
 ```
 
-### Run locally
+### Ejecutar en desarrollo
 
 ```bash
 npm run dev
 ```
 
-The app runs at the URL Vite prints (usually `http://localhost:5173`).
-
-## Scripts
+### Scripts
 
 ```bash
-npm run dev      # development server
-npm run build    # production build
-npm run preview  # preview production build
-npm run lint     # ESLint
+npm run dev
+npm run build
+npm run preview
+npm run lint
+npm audit
 ```
 
-## Contributing
+## Seguridad (importante para repositorio público)
 
-Contributions are welcome. Open an issue with context, or a pull request with a clear description of your changes.
+### Modelo de datos y privacidad
 
-## License
+- No existe backend propio para notas o contraseñas.
+- Las notas se guardan en `localStorage` del navegador del usuario.
+- El generador de contraseñas no almacena contraseñas en persistencia local.
+- La verificación de filtración usa **k-anonimato**:
+  - se calcula hash SHA-1 en cliente,
+  - solo se envían 5 caracteres del prefijo del hash,
+  - la comparación del sufijo se realiza localmente.
+
+### Cabeceras de seguridad en despliegue
+
+En `vercel.json` se incluyen cabeceras de endurecimiento:
+
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy` para deshabilitar APIs sensibles no usadas.
+
+### Buenas prácticas para contribuir
+
+- No subir secretos (`.env`, tokens, claves privadas).
+- No registrar contraseñas ni datos sensibles en consola.
+- Evitar librerías innecesarias y revisar `npm audit` antes de publicar.
+- Mantener dependencias actualizadas y revisar changelogs de seguridad.
+
+### Hallazgos actuales de dependencias (audit)
+
+Al momento de la revisión, `npm audit` reporta vulnerabilidades transitivas en:
+
+- `dompurify` (a través de `monaco-editor`)
+- `esbuild` (a través de `vite` en entorno de desarrollo)
+- `flatted` (cadena de dependencias de lint/caché)
+
+Estas dependen en gran parte de terceros y/o de actualizaciones mayores. Se recomienda:
+
+1. Ejecutar `npm audit fix` para correcciones no disruptivas.
+2. Planificar actualización mayor de `vite` y revisar compatibilidad.
+3. Repetir auditoría en CI antes de cada release público.
+
+## Contribuciones
+
+Se aceptan contribuciones vía issues y pull requests con contexto técnico claro.
+
+## Licencia
 
 MIT.

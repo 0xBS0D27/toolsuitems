@@ -4,7 +4,7 @@ import type { LucideIcon } from 'lucide-react'
 export interface ToolCardProps {
   title: string
   description: string
-  icon: LucideIcon
+  icon: LucideIcon | string
   href?: string
   onClick?: () => void
   comingSoon?: boolean
@@ -15,19 +15,28 @@ export interface ToolCardProps {
 export function ToolCard({
   title,
   description,
-  icon: Icon,
+  icon,
   href,
   onClick,
   comingSoon = false,
   iconBg = 'bg-white/90',
   iconColor = 'text-indigo-600',
 }: ToolCardProps) {
+  const isEmoji = typeof icon === 'string'
+  const Icon = !isEmoji ? icon : null
+
   const content = (
     <>
       <div
         className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${iconBg} ${iconColor} shadow-md transition-transform duration-200 group-hover:scale-110`}
       >
-        <Icon className="h-7 w-7" strokeWidth={1.8} />
+        {isEmoji ? (
+          <span className="text-2xl" aria-hidden="true">
+            {icon}
+          </span>
+        ) : (
+          Icon && <Icon className="h-7 w-7" strokeWidth={1.8} />
+        )}
       </div>
       <div className="min-w-0 flex-1 text-left">
         <h3 className="text-lg font-semibold leading-tight text-gray-900">
