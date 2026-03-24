@@ -45,9 +45,6 @@ export function JsonTreeNavbar() {
         <JsonTreeHelp lightmode={lightmode} />
       </div>
       <div className="flex w-full items-center gap-2 sm:w-auto">
-        <div className="min-w-0 flex-1 sm:w-[320px]">
-          <JsonTreeSearchBar lightmode={lightmode} />
-        </div>
         <JsonTreeToolbar
           fullscreen={fullscreen}
           toggleFullscreen={toggleFullscreen}
@@ -59,6 +56,9 @@ export function JsonTreeNavbar() {
           lightmode={lightmode}
           setLightTheme={setLightTheme}
         />
+      </div>
+      <div className="sm:hidden">
+        <JsonTreeSearchBar lightmode={lightmode} />
       </div>
     </header>
   )
