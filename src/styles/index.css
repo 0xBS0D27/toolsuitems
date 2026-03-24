@@ -35,3 +35,12 @@ body {
     transform: translateY(0);
   }
 }
+
+/* JSON Tree search highlighting */
+.searched_node {
+  fill: rgba(139, 92, 246, 0.16) !important;
+}
+
+.highlight_node {
+  background: rgba(139, 92, 246, 0.28);
+}

@@ -80,6 +80,7 @@ export function TreeEditor() {
         </div>
       )}
       <div
+        id="tree-editor"
         ref={editorContainerRef}
         onContextMenu={(e) => e.preventDefault()}
         className={`absolute h-full w-full ${!lightmode ? 'bg-zinc-900' : ''}`}

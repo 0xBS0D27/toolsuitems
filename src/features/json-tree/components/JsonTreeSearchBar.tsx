@@ -1,57 +1,71 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Search, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useTree } from '@/features/json-tree/store/useTree'
-import type { NodeData } from '@/features/json-tree/core/type'
 import { classNames } from '@/features/json-tree/utility/classNames'
 
 interface JsonTreeSearchBarProps {
   lightmode: boolean
 }
 
-function toNodeText(node: NodeData): string {
-  const text = node.text
-  if (typeof text === 'string') return text
-  if (Array.isArray(text)) {
-    return text
-      .map((item) => {
-        const key = item?.[0] ?? ''
-        const value = item?.[1] ?? ''
-        return `${key} ${value}`
-      })
-      .join(' ')
-  }
-  return ''
-}
-
 export function JsonTreeSearchBar({ lightmode }: JsonTreeSearchBarProps) {
+  const zoomPanPinch = useTree((s) => s.zoomPanPinch)
   const nodes = useTree((s) => s.nodes)
-  const centerOnNode = useTree((s) => s.centerOnNode)
-  const setHoveredNodeId = useTree((s) => s.setHoveredNodeId)
   const [query, setQuery] = useState('')
   const [matchIndex, setMatchIndex] = useState(0)
 
-  const matches = useMemo(() => {
+  const matches = useMemo<HTMLElement[]>(() => {
     const normalized = query.trim().toLowerCase()
-    if (!normalized) return []
-    return nodes.filter((node) => toNodeText(node).toLowerCase().includes(normalized))
+    if (!normalized || nodes.length === 0 || typeof document === 'undefined') return []
+    const root = document.getElementById('tree-editor')
+    if (!root) return []
+    const spans = Array.from(root.querySelectorAll('span[data-key]')) as HTMLElement[]
+    return spans.filter((el) => (el.getAttribute('data-key') ?? '').toLowerCase().includes(normalized))
   }, [nodes, query])
+
+  const cleanupHighlight = () => {
+    if (typeof document === 'undefined') return
+    document.querySelectorAll('rect.searched_node, .highlight_node').forEach((el) => {
+      el.classList.remove('searched_node', 'highlight_node')
+    })
+  }
+
+  const focusMatch = useCallback((nodeEl: HTMLElement) => {
+    if (!zoomPanPinch) return
+    const wrapper = zoomPanPinch.instance.wrapperComponent as HTMLElement | undefined
+    if (!wrapper) return
+
+    const x = Number(nodeEl.getAttribute('data-x') ?? '0')
+    const y = Number(nodeEl.getAttribute('data-y') ?? '0')
+    const scale = 0.8
+    const newX = (wrapper.offsetLeft - x) * scale + wrapper.clientWidth / 2 - nodeEl.clientWidth
+    const newY = (wrapper.offsetTop - y) * scale + wrapper.clientHeight / 5 - nodeEl.clientHeight
+    zoomPanPinch.setTransform(newX, newY, scale)
+  }, [zoomPanPinch])
 
   useEffect(() => {
     if (!query.trim() || matches.length === 0) {
       setMatchIndex(0)
-      setHoveredNodeId(null)
+      cleanupHighlight()
       return
     }
     setMatchIndex(0)
-  }, [query, matches.length, setHoveredNodeId])
+  }, [query, matches.length])
 
   useEffect(() => {
+    cleanupHighlight()
     if (!query.trim() || matches.length === 0) return
+
+    matches.forEach((nodeEl) => {
+      const foreignObject = nodeEl.closest('foreignObject')
+      const rect = foreignObject?.previousElementSibling
+      rect?.classList.add('searched_node')
+    })
+
     const current = matches[matchIndex]
     if (!current) return
-    setHoveredNodeId(current.id)
-    centerOnNode(current.id)
-  }, [centerOnNode, matchIndex, matches, query, setHoveredNodeId])
+    current.classList.add('highlight_node')
+    focusMatch(current)
+  }, [focusMatch, matchIndex, matches, query])
 
   const goPrev = () => {
     if (matches.length === 0) return
@@ -66,7 +80,7 @@ export function JsonTreeSearchBar({ lightmode }: JsonTreeSearchBarProps) {
   const clear = () => {
     setQuery('')
     setMatchIndex(0)
-    setHoveredNodeId(null)
+    cleanupHighlight()
   }
 
   const frameClass = lightmode
@@ -83,6 +97,12 @@ export function JsonTreeSearchBar({ lightmode }: JsonTreeSearchBarProps) {
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault()
+            goNext()
+          }
+        }}
         placeholder="Search node"
         className={classNames(
           'min-w-0 flex-1 bg-transparent text-sm outline-none',
