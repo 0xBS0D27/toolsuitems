@@ -33,9 +33,10 @@ export function JsonTreePage() {
     }
   }, [isMobile, mobileTab, fullscreen, centerView])
 
-  const editorShell = (withRightBorder: boolean) =>
+  const editorShell = (withRightBorder: boolean, fill = true) =>
     classNames(
-      'flex min-h-0 flex-1 flex-col',
+      'flex min-h-0 flex-col',
+      fill && 'flex-1',
       withRightBorder && 'border-r',
       lightmode ? 'border-gray-200 bg-white' : 'border-zinc-700 bg-zinc-800'
     )
@@ -101,7 +102,7 @@ export function JsonTreePage() {
           <>
             {showEditor && (
               <section
-                className={classNames(editorShell(true), 'shrink-0')}
+                className={classNames(editorShell(true, false), 'shrink-0')}
                 style={{ width: 'min(100%, 450px)', minWidth: 320 }}
               >
                 <MonacoEditor />
