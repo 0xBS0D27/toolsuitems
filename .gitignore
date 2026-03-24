@@ -1,0 +1,35 @@
+# Dependencias
+node_modules/
+
+# Build (Vercel construye desde el código fuente)
+dist/
+dist-ssr/
+*.local
+
+# Entorno (secretos; no subir nunca)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# TypeScript / cachés
+*.tsbuildinfo
+
+# Tests / cobertura
+coverage/

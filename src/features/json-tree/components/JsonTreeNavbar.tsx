@@ -1,0 +1,57 @@
+import { Link } from 'react-router-dom'
+import { Braces } from 'lucide-react'
+import { useTree } from '@/features/json-tree/store/useTree'
+import { useStored } from '@/features/json-tree/store/useStored'
+import { getNextDirection } from '@/features/json-tree/core/graph/getNextDirection'
+import { JsonTreeToolbar } from './JsonTreeToolbar'
+
+export function JsonTreeNavbar() {
+  const fullscreen = useTree((s) => s.fullscreen)
+  const toggleFullscreen = useTree((s) => s.toggleFullscreen)
+  const direction = useTree((s) => s.direction)
+  const setDirection = useTree((s) => s.setDirection)
+  const centerView = useTree((s) => s.centerView)
+  const zoomIn = useTree((s) => s.zoomIn)
+  const zoomOut = useTree((s) => s.zoomOut)
+  const lightmode = useStored((s) => s.lightmode)
+  const setLightTheme = useStored((s) => s.setLightTheme)
+
+  return (
+    <header
+      className={`flex h-14 items-center justify-between gap-2 border-b px-4 py-3 ${
+        lightmode
+          ? 'border-gray-200 bg-white'
+          : 'border-zinc-700 bg-zinc-800'
+      }`}
+    >
+      <div className="flex items-center gap-2">
+        <Link
+          to="/"
+          className={`flex items-center gap-2 rounded-md px-2 py-1 ${
+            lightmode ? 'hover:bg-gray-100' : 'hover:bg-zinc-700 text-white'
+          }`}
+        >
+          <Braces className="h-6 w-6 text-indigo-600" />
+          <span
+            className={`hidden font-semibold md:inline ${
+              lightmode ? 'text-gray-900' : 'text-white'
+            }`}
+          >
+            JSON Tree
+          </span>
+        </Link>
+      </div>
+      <JsonTreeToolbar
+        fullscreen={fullscreen}
+        toggleFullscreen={toggleFullscreen}
+        direction={direction}
+        setDirection={() => setDirection(getNextDirection(direction))}
+        centerView={centerView}
+        zoomIn={zoomIn}
+        zoomOut={zoomOut}
+        lightmode={lightmode}
+        setLightTheme={setLightTheme}
+      />
+    </header>
+  )
+}
