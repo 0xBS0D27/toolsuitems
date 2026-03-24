@@ -54,7 +54,10 @@ export function JsonTreePage() {
       lightmode ? 'border-gray-200 bg-white' : 'border-zinc-700 bg-zinc-800'
     )
 
-  const graphSectionClass = classNames('relative min-h-0 min-w-0 flex-1')
+  const graphSectionClass = classNames(
+    'relative min-h-0 min-w-0 flex-1 overflow-hidden',
+    'h-full'
+  )
 
   return (
     <div
@@ -122,7 +125,7 @@ export function JsonTreePage() {
             >
               <MonacoEditor />
             </Allotment.Pane>
-            <Allotment.Pane minSize={0} className="h-full">
+            <Allotment.Pane minSize={0} className="flex h-full min-h-0 min-w-0 flex-col">
               <section className={graphSectionClass}>
                 <TreeEditor />
               </section>

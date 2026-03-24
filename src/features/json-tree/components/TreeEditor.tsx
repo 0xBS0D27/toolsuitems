@@ -82,7 +82,7 @@ export function TreeEditor() {
         id="tree-editor"
         ref={editorContainerRef}
         onContextMenu={(e) => e.preventDefault()}
-        className={`absolute h-full w-full ${!lightmode ? 'bg-zinc-900' : ''}`}
+        className={`absolute inset-0 ${!lightmode ? 'bg-zinc-900' : ''}`}
       >
         <div
           className={`absolute right-1 top-1 z-20 hidden rounded p-1 text-xs sm:block ${
