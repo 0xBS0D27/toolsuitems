@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { JsonTreeNavbar } from '@/features/json-tree/components/JsonTreeNavbar'
 import { MonacoEditor } from '@/features/json-tree/components/MonacoEditor'
 import { TreeEditor } from '@/features/json-tree/components/TreeEditor'
@@ -17,10 +17,12 @@ type MobileTab = 'editor' | 'graph'
 export function JsonTreePage() {
   const setContents = useApp((s) => s.setContents)
   const fullscreen = useTree((s) => s.fullscreen)
+  const toggleFullscreen = useTree((s) => s.toggleFullscreen)
   const centerView = useTree((s) => s.centerView)
   const lightmode = useStored((s) => s.lightmode)
   const isMobile = useIsMobile()
   const [mobileTab, setMobileTab] = useState<MobileTab>('editor')
+  const prevIsMobileRef = useRef(isMobile)
 
   useEffect(() => {
     setContents({ contents: JSON_TEMPLATE, hasChanges: false })
@@ -35,6 +37,14 @@ export function JsonTreePage() {
       return () => window.clearTimeout(t)
     }
   }, [isMobile, mobileTab, fullscreen, centerView])
+
+  // Aisla mobile/desktop: si vienes de mobile fullscreen, en desktop se restaura editor+gráfico.
+  useEffect(() => {
+    if (prevIsMobileRef.current && !isMobile && fullscreen) {
+      toggleFullscreen(false)
+    }
+    prevIsMobileRef.current = isMobile
+  }, [isMobile, fullscreen, toggleFullscreen])
 
   const editorShell = (withRightBorder: boolean, fill = true) =>
     classNames(
