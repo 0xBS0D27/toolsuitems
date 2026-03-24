@@ -4,7 +4,6 @@ import { useTree } from '@/features/json-tree/store/useTree'
 import { useStored } from '@/features/json-tree/store/useStored'
 import { getNextDirection } from '@/features/json-tree/core/graph/getNextDirection'
 import { JsonTreeToolbar } from './JsonTreeToolbar'
-import { JsonTreeHelp } from './JsonTreeHelp'
 import { JsonTreeSearchBar } from './JsonTreeSearchBar'
 
 interface JsonTreeNavbarProps {
@@ -46,7 +45,6 @@ export function JsonTreeNavbar({ showSearch }: JsonTreeNavbarProps) {
             JSON Tree
           </span>
         </Link>
-        <JsonTreeHelp lightmode={lightmode} />
       </div>
       <div className="flex w-full items-center justify-end gap-2 sm:w-auto">
         {showSearch && (

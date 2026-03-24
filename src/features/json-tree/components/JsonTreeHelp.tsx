@@ -4,9 +4,10 @@ import { Modal } from '@/components/ui/Modal'
 
 interface JsonTreeHelpProps {
   lightmode: boolean
+  compact?: boolean
 }
 
-export function JsonTreeHelp({ lightmode }: JsonTreeHelpProps) {
+export function JsonTreeHelp({ lightmode, compact = false }: JsonTreeHelpProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -14,13 +15,15 @@ export function JsonTreeHelp({ lightmode }: JsonTreeHelpProps) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`inline-flex h-8 w-8 items-center justify-center rounded-full transition ${
+        className={`inline-flex items-center justify-center rounded-full transition ${
+          compact ? 'h-6 w-6' : 'h-8 w-8'
+        } ${
           lightmode ? 'text-gray-500 hover:bg-gray-100 hover:text-gray-700' : 'text-zinc-300 hover:bg-zinc-700 hover:text-white'
         }`}
         aria-label="Cómo funciona JSON Tree"
         title="Cómo funciona JSON Tree"
       >
-        <CircleHelp className="h-4 w-4" />
+        <CircleHelp className={compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} />
       </button>
 
       <Modal isOpen={open} onClose={() => setOpen(false)} title="Cómo funciona JSON Tree">

@@ -1,6 +1,7 @@
 import { useApp } from '@/features/json-tree/store/useApp'
 import { useStored } from '@/features/json-tree/store/useStored'
 import { Check, AlertCircle } from 'lucide-react'
+import { JsonTreeHelp } from './JsonTreeHelp'
 
 export function EditorInfobar() {
   const error = useApp((s) => s.error)
@@ -22,6 +23,7 @@ export function EditorInfobar() {
           <>
             <AlertCircle className="h-4 w-4 text-red-500" />
             <span className="text-red-400">JSON inválido</span>
+            <JsonTreeHelp lightmode={lightmode} compact />
           </>
         ) : (
           <>
@@ -33,6 +35,7 @@ export function EditorInfobar() {
             >
               JSON válido
             </span>
+            <JsonTreeHelp lightmode={lightmode} compact />
           </>
         )}
       </div>
