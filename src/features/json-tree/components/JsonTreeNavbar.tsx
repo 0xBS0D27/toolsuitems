@@ -19,13 +19,13 @@ export function JsonTreeNavbar() {
 
   return (
     <header
-      className={`flex h-14 items-center justify-between gap-2 border-b px-4 py-3 ${
+      className={`flex min-h-14 flex-col gap-2 border-b px-3 py-2 sm:h-14 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:py-3 ${
         lightmode
           ? 'border-gray-200 bg-white'
           : 'border-zinc-700 bg-zinc-800'
       }`}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-start">
         <Link
           to="/"
           className={`flex items-center gap-2 rounded-md px-2 py-1 ${
@@ -43,17 +43,19 @@ export function JsonTreeNavbar() {
         </Link>
         <JsonTreeHelp lightmode={lightmode} />
       </div>
-      <JsonTreeToolbar
-        fullscreen={fullscreen}
-        toggleFullscreen={toggleFullscreen}
-        direction={direction}
-        setDirection={() => setDirection(getNextDirection(direction))}
-        centerView={centerView}
-        zoomIn={zoomIn}
-        zoomOut={zoomOut}
-        lightmode={lightmode}
-        setLightTheme={setLightTheme}
-      />
+      <div className="w-full sm:w-auto">
+        <JsonTreeToolbar
+          fullscreen={fullscreen}
+          toggleFullscreen={toggleFullscreen}
+          direction={direction}
+          setDirection={() => setDirection(getNextDirection(direction))}
+          centerView={centerView}
+          zoomIn={zoomIn}
+          zoomOut={zoomOut}
+          lightmode={lightmode}
+          setLightTheme={setLightTheme}
+        />
+      </div>
     </header>
   )
 }

@@ -23,7 +23,8 @@ export function JsonTreeToolbar(props: Props) {
       : 'border-zinc-600 bg-zinc-800 text-gray-300 hover:border-amber-400 hover:text-amber-400'
 
   return (
-    <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2">
+    <div className="-mx-1 overflow-x-auto px-1 sm:mx-0 sm:overflow-visible sm:px-0">
+      <div className="flex min-w-max items-center justify-start gap-1.5 sm:justify-end sm:gap-2">
       <button
         type="button"
         className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded border sm:h-8 sm:min-h-0 sm:min-w-0 sm:w-8 ${btn}`}
@@ -65,6 +66,7 @@ export function JsonTreeToolbar(props: Props) {
         {props.lightmode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
       </button>
       <DownloadImageModal isOpen={downloadOpen} onClose={() => setDownloadOpen(false)} />
+      </div>
     </div>
   )
 }
