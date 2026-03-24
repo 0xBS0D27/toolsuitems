@@ -4,6 +4,7 @@ import { NotesPage } from '@/features/notes/NotesPage'
 import { BoardsPage } from '@/features/boards'
 import { JsonTreePage } from '@/features/json-tree'
 import { PasswordGeneratorPage } from '@/features/password-generator'
+import { NmapAnalyzerPage } from '@/features/nmap-analyzer'
 import { useEffect } from 'react'
 
 function useDocumentTitle() {
@@ -15,6 +16,8 @@ function useDocumentTitle() {
     else if (pathname.startsWith('/json-tree')) document.title = 'JSON Tree - ToolSuitems'
     else if (pathname.startsWith('/generador-contrasenas'))
       document.title = 'Generador de contraseñas - ToolSuitems'
+    else if (pathname.startsWith('/analizador-nmap-xml'))
+      document.title = 'Nmap XML Parser & Security Analyzer - ToolSuitems'
     else document.title = 'ToolSuitems'
   }, [pathname])
 }
@@ -29,6 +32,7 @@ export default function App() {
       <Route path="/tablero" element={<BoardsPage />} />
       <Route path="/json-tree" element={<JsonTreePage />} />
       <Route path="/generador-contrasenas" element={<PasswordGeneratorPage />} />
+      <Route path="/analizador-nmap-xml" element={<NmapAnalyzerPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

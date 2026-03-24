@@ -9,6 +9,8 @@ import { useStored } from '@/features/json-tree/store/useStored'
 import { JSON_TEMPLATE } from '@/features/json-tree/constants/json'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { classNames } from '@/features/json-tree/utility/classNames'
+import { Allotment } from 'allotment'
+import 'allotment/dist/style.css'
 
 type MobileTab = 'editor' | 'graph'
 
@@ -25,6 +27,7 @@ export function JsonTreePage() {
   }, [setContents])
 
   const showEditor = !fullscreen
+  const showSearch = !isMobile || fullscreen || mobileTab === 'graph'
 
   useEffect(() => {
     if (isMobile && mobileTab === 'graph' && !fullscreen) {
@@ -49,7 +52,7 @@ export function JsonTreePage() {
         lightmode ? 'bg-gray-50' : 'bg-zinc-900'
       }`}
     >
-      <JsonTreeNavbar />
+      <JsonTreeNavbar showSearch={showSearch} />
       {isMobile && !fullscreen && (
         <div
           className={classNames(
@@ -99,19 +102,22 @@ export function JsonTreePage() {
       )}
       <main className="flex min-h-0 flex-1 flex-col md:flex-row">
         {!isMobile && (
-          <>
-            {showEditor && (
-              <section
-                className={classNames(editorShell(true, false), 'shrink-0')}
-                style={{ width: 'min(100%, 450px)', minWidth: 320 }}
-              >
-                <MonacoEditor />
+          <Allotment className="!relative flex h-full w-full" proportionalLayout={false}>
+            <Allotment.Pane
+              className={classNames(editorShell(true, false), 'h-full')}
+              preferredSize={450}
+              minSize={showEditor ? 450 : 0}
+              maxSize={700}
+              visible={showEditor}
+            >
+              <MonacoEditor />
+            </Allotment.Pane>
+            <Allotment.Pane minSize={0} className="h-full">
+              <section className={graphSectionClass}>
+                <TreeEditor />
               </section>
-            )}
-            <section className={graphSectionClass}>
-              <TreeEditor />
-            </section>
-          </>
+            </Allotment.Pane>
+          </Allotment>
         )}
         {isMobile && !fullscreen && (
           <>

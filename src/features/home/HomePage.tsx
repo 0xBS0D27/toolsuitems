@@ -1,4 +1,4 @@
-import { FileText, Github, LayoutGrid, Wrench, Braces, LockKeyhole } from 'lucide-react'
+import { FileText, Github, LayoutGrid, Wrench, Braces, LockKeyhole, ShieldAlert } from 'lucide-react'
 import { ToolCard } from './ToolCard'
 
 const REPO_URL = 'https://github.com/0xBS0D27/toolsuitems'
@@ -36,6 +36,14 @@ const TOOLS = [
     href: '/generador-contrasenas',
     iconBg: 'bg-violet-50',
     iconColor: 'text-violet-600',
+  },
+  {
+    title: 'Nmap XML Parser',
+    description: 'Analiza escaneos de Nmap, filtra riesgos y busca exploits por versión.',
+    icon: ShieldAlert,
+    href: '/analizador-nmap-xml',
+    iconBg: 'bg-rose-50',
+    iconColor: 'text-rose-600',
   },
 ]
 

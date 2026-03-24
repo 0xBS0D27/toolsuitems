@@ -5,8 +5,13 @@ import { useStored } from '@/features/json-tree/store/useStored'
 import { getNextDirection } from '@/features/json-tree/core/graph/getNextDirection'
 import { JsonTreeToolbar } from './JsonTreeToolbar'
 import { JsonTreeHelp } from './JsonTreeHelp'
+import { JsonTreeSearchBar } from './JsonTreeSearchBar'
 
-export function JsonTreeNavbar() {
+interface JsonTreeNavbarProps {
+  showSearch: boolean
+}
+
+export function JsonTreeNavbar({ showSearch }: JsonTreeNavbarProps) {
   const fullscreen = useTree((s) => s.fullscreen)
   const toggleFullscreen = useTree((s) => s.toggleFullscreen)
   const direction = useTree((s) => s.direction)
@@ -43,7 +48,12 @@ export function JsonTreeNavbar() {
         </Link>
         <JsonTreeHelp lightmode={lightmode} />
       </div>
-      <div className="flex w-full items-center gap-2 sm:w-auto">
+      <div className="flex w-full items-center justify-end gap-2 sm:w-auto">
+        {showSearch && (
+          <div className="hidden w-[200px] sm:block">
+            <JsonTreeSearchBar lightmode={lightmode} />
+          </div>
+        )}
         <JsonTreeToolbar
           fullscreen={fullscreen}
           toggleFullscreen={toggleFullscreen}
@@ -56,6 +66,11 @@ export function JsonTreeNavbar() {
           setLightTheme={setLightTheme}
         />
       </div>
+      {showSearch && (
+        <div className="sm:hidden">
+          <JsonTreeSearchBar lightmode={lightmode} />
+        </div>
+      )}
     </header>
   )
 }

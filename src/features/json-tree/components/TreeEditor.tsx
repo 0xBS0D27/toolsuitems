@@ -8,7 +8,6 @@ import { useToggleHide } from '@/features/json-tree/hooks/useToggleHide'
 import { useElementSize } from '@/features/json-tree/hooks/useElementSize'
 import { useStored } from '@/features/json-tree/store/useStored'
 import { CustomNode } from '@/features/json-tree/core/node'
-import { JsonTreeSearchBar } from './JsonTreeSearchBar'
 
 export function TreeEditor() {
   const loading = useTree((s) => s.loading)
@@ -85,9 +84,6 @@ export function TreeEditor() {
         onContextMenu={(e) => e.preventDefault()}
         className={`absolute h-full w-full ${!lightmode ? 'bg-zinc-900' : ''}`}
       >
-        <div className="pointer-events-auto absolute left-1/2 top-2 z-30 w-[min(420px,calc(100%-16px))] -translate-x-1/2 sm:w-[min(420px,65%)]">
-          <JsonTreeSearchBar lightmode={lightmode} />
-        </div>
         <div
           className={`absolute right-1 top-1 z-20 hidden rounded p-1 text-xs sm:block ${
             lightmode ? 'bg-white/80 text-gray-600' : 'bg-zinc-800 text-gray-400'
