@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Canvas, Edge } from 'reaflow'
 import type { EdgeProps, NodeProps } from 'reaflow'
 import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch'
@@ -23,6 +23,11 @@ export function TreeEditor() {
   const [paneWidth, setPaneWidth] = useState(2000)
   const [paneHeight, setPaneHeight] = useState(2000)
   const [editorContainerRef, editorSize] = useElementSize<HTMLDivElement>()
+
+  const initialCanvasScale = useMemo(() => {
+    if (typeof window === 'undefined') return 0.4
+    return window.matchMedia('(max-width: 767px)').matches ? 0.52 : 0.4
+  }, [])
 
   const onInit = useCallback(
     (ref: ReactZoomPanPinchRef) => setZoomPanPinch(ref),
@@ -79,7 +84,7 @@ export function TreeEditor() {
         className={`absolute h-full w-full ${!lightmode ? 'bg-zinc-900' : ''}`}
       >
         <div
-          className={`absolute right-1 top-1 z-20 rounded p-1 text-xs ${
+          className={`absolute right-1 top-1 z-20 hidden rounded p-1 text-xs sm:block ${
             lightmode ? 'bg-white/80 text-gray-600' : 'bg-zinc-800 text-gray-400'
           }`}
         >
@@ -88,7 +93,7 @@ export function TreeEditor() {
         <TransformWrapper
           maxScale={2}
           minScale={0.05}
-          initialScale={0.4}
+          initialScale={initialCanvasScale}
           wheel={{ step: 0.04 }}
           onInit={onInit}
         >

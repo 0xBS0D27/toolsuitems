@@ -17,27 +17,24 @@ type Props = {
 export function JsonTreeToolbar(props: Props) {
   const [downloadOpen, setDownloadOpen] = useState(false)
 
+  const btn =
+    props.lightmode
+      ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
+      : 'border-zinc-600 bg-zinc-800 text-gray-300 hover:border-amber-400 hover:text-amber-400'
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2">
       <button
         type="button"
-        className={`flex h-8 w-8 items-center justify-center rounded border ${
-          props.lightmode
-            ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-            : 'border-zinc-600 bg-zinc-800 text-gray-300 hover:border-amber-400 hover:text-amber-400'
-        }`}
+        className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded border sm:h-8 sm:min-h-0 sm:min-w-0 sm:w-8 ${btn}`}
         aria-label="Descargar imagen"
         onClick={() => setDownloadOpen(true)}
       >
-        <Download className="h-4 w-4" />
+        <Download className="h-4 w-4 sm:h-4" />
       </button>
       <button
         type="button"
-        className={`hidden h-8 w-8 items-center justify-center rounded border md:flex ${
-          props.lightmode
-            ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-            : 'border-zinc-600 bg-zinc-800 text-gray-300 hover:border-amber-400 hover:text-amber-400'
-        }`}
+        className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded border sm:h-8 sm:min-h-0 sm:min-w-0 sm:w-8 ${btn}`}
         aria-label="Zoom +"
         onClick={props.zoomIn}
       >
@@ -45,11 +42,7 @@ export function JsonTreeToolbar(props: Props) {
       </button>
       <button
         type="button"
-        className={`hidden h-8 w-8 items-center justify-center rounded border md:flex ${
-          props.lightmode
-            ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-            : 'border-zinc-600 bg-zinc-800 text-gray-300 hover:border-amber-400 hover:text-amber-400'
-        }`}
+        className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded border sm:h-8 sm:min-h-0 sm:min-w-0 sm:w-8 ${btn}`}
         aria-label="Zoom -"
         onClick={props.zoomOut}
       >
@@ -57,11 +50,7 @@ export function JsonTreeToolbar(props: Props) {
       </button>
       <button
         type="button"
-        className={`flex h-8 w-8 items-center justify-center rounded border ${
-          props.lightmode
-            ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-            : 'border-zinc-600 bg-zinc-800 text-gray-300 hover:border-amber-400 hover:text-amber-400'
-        }`}
+        className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded border sm:h-8 sm:min-h-0 sm:min-w-0 sm:w-8 ${btn}`}
         aria-label="Centrar vista"
         onClick={props.centerView}
       >
@@ -69,11 +58,7 @@ export function JsonTreeToolbar(props: Props) {
       </button>
       <button
         type="button"
-        className={`flex h-8 w-8 items-center justify-center rounded border ${
-          props.lightmode
-            ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-            : 'border-zinc-600 bg-zinc-800 text-gray-300 hover:border-amber-400 hover:text-amber-400'
-        }`}
+        className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded border sm:h-8 sm:min-h-0 sm:min-w-0 sm:w-8 ${btn}`}
         aria-label="Tema"
         onClick={() => props.setLightTheme(!props.lightmode)}
       >

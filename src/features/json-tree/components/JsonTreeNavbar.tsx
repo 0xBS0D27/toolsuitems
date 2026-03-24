@@ -33,7 +33,7 @@ export function JsonTreeNavbar() {
         >
           <Braces className="h-6 w-6 text-indigo-600" />
           <span
-            className={`hidden font-semibold md:inline ${
+            className={`max-w-[120px] truncate font-semibold sm:max-w-none ${
               lightmode ? 'text-gray-900' : 'text-white'
             }`}
           >
