@@ -1,3 +1,11 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    { "source": "/robots.txt", "destination": "/robots.txt" },
+    {
+      "source": "/google897c2cb5b17a283f.html",
+      "destination": "/google897c2cb5b17a283f.html"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
